@@ -1,0 +1,28 @@
+apply plugin: 'groovy'
+apply plugin: 'eclipse'
+
+// In this section you declare where to find the dependencies of your project
+
+repositories {
+    mavenLocal()
+    maven {
+        credentials {
+            username mavenRepoUser
+            password mavenRepoPwd
+        }
+        url "${mavenRepoBaseUrl}/repo"
+    }
+}
+
+sourceSets {
+    main {
+        groovy {
+            srcDirs = [ 'vars']
+        }
+    }
+}
+
+
+dependencies {
+    compile group: 'org.codehaus.groovy' , name: 'groovy-all', version: '2.4.9'
+}
