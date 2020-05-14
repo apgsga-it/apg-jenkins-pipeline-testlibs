@@ -21,8 +21,8 @@ pipeline {
                 echo "Waiting for Input"
                 timeout(time: 10, unit: 'DAYS') {
                     script {
-                        recievedMsg = sh(returnStdout: true, script: "src/test/ruby/input.rb").trim()
-                        println "Input Script output: $recievedMsg"
+                        recievedStatus = sh(returnStatus: true, script: "src/test/ruby/input.rb")
+                        println "Input Script status: $recievedStatus"
                     }
                 }
             }
@@ -32,8 +32,8 @@ pipeline {
                 echo "Waiting for some more Input"
                 timeout(time: 10, unit: 'DAYS') {
                     script {
-                        recievedMsg = sh(returnStdout: true, script: "src/test/ruby/input.rb").trim()
-                        println "Input Script output: $recievedMsg"
+                        recievedStatus = sh(returnStatus: true, script: "src/test/ruby/input.rb")
+                        println "Input Script status: $recievedStatus"
                     }
                 }
             }
