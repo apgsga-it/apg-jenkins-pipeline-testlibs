@@ -12,9 +12,6 @@ pipeline {
         }
         stage('Waiting for some Input') {
             steps {
-                options {
-                    disableResume()
-                }
                 echo "Waiting for Input"
                 timeout(time: 10, unit: 'DAYS') {
                     script {
@@ -26,9 +23,6 @@ pipeline {
         }
         stage('Waiting some more') {
             steps {
-                options {
-                    disableResume()
-                }
                 echo "Waiting for some more Input"
                 timeout(time: 10, unit: 'DAYS') {
                     script {
