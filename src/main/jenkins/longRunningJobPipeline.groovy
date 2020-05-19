@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    tools {
+        maven 'apache-maven-3.6.3'
+        jdk 'Jdk8'
+    }
     stages {
         stage('Executing Long Running State') { // for display purposes
             steps {
