@@ -4,7 +4,10 @@ pipeline {
         stage('Executing Long Running State') { // for display purposes
             steps {
                 echo "checkout apg-gradle-plugins-testsmodules von HEAD"
-                sh "cvs -d${env.CVS_ROOT} co apg-gradle-plugins-testsmodules"
+                script {
+                    recievedStatus = sh(returnStdout: true, script: "cvs -d${env.CVS_ROOT} co apg-gradle-plugins-testsmodules")
+                    println "Input Script status: $recievedStatus"
+                }
                 echo "Build Bom"
                 dir ("apg-gradle-plugins-testsmodules/testapp/testapp-bom") {
                     withMaven( maven: 'apache-maven-3.5.0') { sh "mvn clean install" }
