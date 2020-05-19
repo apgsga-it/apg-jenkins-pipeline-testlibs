@@ -4,6 +4,12 @@ pipeline {
         stage('Executing Long Running State') { // for display purposes
             steps {
                 echo "checkout apg-gradle-plugins-testsmodules von HEAD"
+                try {
+                    sh 'might fail'
+                } catch (err) {
+                    echo "Caught: ${err}"
+                    currentBuild.result = 'FAILURE'
+                }
                 sh "cvs -d${env.CVS_ROOT} co apg-gradle-plugins-testsmodules"
                 echo "Build Bom"
                 dir ("apg-gradle-plugins-testsmodules/testapp/testapp-bom") {
