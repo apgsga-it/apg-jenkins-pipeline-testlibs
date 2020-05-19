@@ -26,6 +26,8 @@ pipeline {
         }
         stage('Waiting for some Input') {
             steps {
+                echo "Getting some Ruby script"
+                git branch: 'IT-35749-Discussions', url: 'https://github.com/apgsga-it/apg-jenkins-pipelines.git'
                 echo "Waiting for Input"
                 timeout(time: 10, unit: 'DAYS') {
                     script {
