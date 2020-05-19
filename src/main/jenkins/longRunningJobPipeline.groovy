@@ -3,19 +3,18 @@ pipeline {
     stages {
         stage('Executing Long Running State') { // for display purposes
             steps {
-                echo "checkout apg-gradle-plugins-testsmodules von HEAD"
-                sh("rm -Rf apg-gradle-plugins-testsmodules")
-                sh("cvs -d${env.CVS_ROOT} co apg-gradle-plugins-testsmodules 2>&1")
+                echo "checkout apg-gradle-plugins-testsmodules von git"
+                git "https://github.com/apgsga-it/apg-gradle-plugins.git"
                 echo "Build Bom"
-                dir("apg-gradle-plugins-testsmodules/testapp/testapp-bom") {
+                dir("integration/modules/testapp-bom") {
                     withMaven(maven: 'apache-maven-3.5.0') { sh "mvn clean install" }
                 }
                 echo "Build Parent Pom"
-                dir("apg-gradle-plugins-testsmodules/testapp/testapp/testapp-parentpom") {
+                dir("integration/modules/testapp-parentpom") {
                     withMaven(maven: 'apache-maven-3.5.0') { sh "mvn clean install" }
                 }
                 echo "Build All"
-                dir("apg-gradle-plugins-testsmodules/testapp/testapp") {
+                dir("integration/modules/testapp") {
                     withMaven(maven: 'apache-maven-3.5.0') { sh "mvn clean install" }
                 }
                 echo "Build Done"
