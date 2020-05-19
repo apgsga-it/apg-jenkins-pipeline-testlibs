@@ -7,15 +7,15 @@ pipeline {
                 git "https://github.com/apgsga-it/apg-gradle-plugins.git"
                 echo "Build Bom"
                 dir("integration/modules/testapp-bom") {
-                    withMaven(maven: 'apache-maven-3.5.0') { sh "mvn clean install" }
+                    sh "mvn clean install"
                 }
                 echo "Build Parent Pom"
                 dir("integration/modules/testapp-parentpom") {
-                    withMaven(maven: 'apache-maven-3.5.0') { sh "mvn clean install" }
+                    sh "mvn clean install"
                 }
                 echo "Build All"
                 dir("integration/modules/testapp") {
-                    withMaven(maven: 'apache-maven-3.5.0') { sh "mvn clean install" }
+                    sh "mvn clean install"
                 }
                 echo "Build Done"
             }
