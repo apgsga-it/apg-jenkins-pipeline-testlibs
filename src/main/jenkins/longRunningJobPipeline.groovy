@@ -5,12 +5,12 @@ pipeline {
             steps {
                 echo "checkout apg-gradle-plugins-testsmodules von HEAD"
                 try {
-                    sh 'might fail'
+                    sh "cvs -d${env.CVS_ROOT} co apg-gradle-plugins-testsmodules"
                 } catch (err) {
                     echo "Caught: ${err}"
                     currentBuild.result = 'FAILURE'
+                    error("Cvs checkout faile: ${err}")
                 }
-                sh "cvs -d${env.CVS_ROOT} co apg-gradle-plugins-testsmodules"
                 echo "Build Bom"
                 dir ("apg-gradle-plugins-testsmodules/testapp/testapp-bom") {
                     withMaven( maven: 'apache-maven-3.5.0') { sh "mvn clean install" }
