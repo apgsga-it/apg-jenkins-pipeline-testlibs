@@ -14,7 +14,7 @@ pipeline {
                     sh "mvn clean install"
                 }
                 echo "Build All"
-                dir("integration/modules/testapp") {
+                dir("integration/modules") {
                     sh "mvn clean install"
                 }
                 echo "Build Done"
