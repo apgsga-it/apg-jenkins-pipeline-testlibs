@@ -21,17 +21,6 @@ pipeline {
                 }
             }
         }
-        stage('Waiting some more') {
-            steps {
-                echo "Waiting for some more Input"
-                timeout(time: 10, unit: 'DAYS') {
-                    script {
-                        recievedStatus = sh(returnStatus: true, script: "${WORKSPACE}/src/test/ruby/input.rb")
-                        println "Input Script status: $recievedStatus"
-                    }
-                }
-            }
-        }
         stage('Finishing up') {
             steps {
                 echo "Oki what else"
