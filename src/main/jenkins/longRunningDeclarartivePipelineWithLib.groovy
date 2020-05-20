@@ -1,8 +1,13 @@
 #!groovy
 library 'testlib-functions'
+def SCRIPT_STASH_NAME = "scripts"
 pipeline {
+    options {
+        preserveStashes(buildCount: 2)
+    }
     agent any
     stages {
+        stash name: SCRIPT_STASH_NAME , includes: "${WORKSPACE}/src/test/ruby/*"
         stage('Executing Long Running State') { // for display purposes
             steps {
                 echo "checkout apg-gradle-plugins-testsmodules von git"
@@ -16,9 +21,8 @@ pipeline {
         }
         stage('Waiting for some Input') {
             steps {
-                git "https://github.com/apgsga-it/apg-gradle-plugins.git"
                 script {
-                    functions.waitForRabbit()
+                    functions.waitForRabbit(SCRIPT_STASH_NAME)
                 }
             }
         }
