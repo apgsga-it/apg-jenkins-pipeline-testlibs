@@ -17,7 +17,7 @@ def buildSome(aBuildDir) {
 def waitForRabbit(stashName) {
     echo "Waiting for Input"
     unstash stashName
-    def recievedStatus = sh(returnStatus: true, script: "input.rb")
+    def recievedStatus = sh(returnStatus: true, script: "src/test/ruby/input.rb")
     if (recievedStatus != 0) {
         error"Waiting for Input terminated with ${recievedStatus}"
     }
