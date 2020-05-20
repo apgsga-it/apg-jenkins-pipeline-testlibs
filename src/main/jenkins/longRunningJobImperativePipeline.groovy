@@ -22,7 +22,10 @@ node {
         git branch: 'IT-35749-Discussions', url: 'https://github.com/apgsga-it/apg-jenkins-pipelines.git'
         echo "Waiting for Input"
         def recievedStatus = sh(returnStatus: true, script: "${WORKSPACE}/src/test/ruby/input.rb")
-        echo "Input Script status: $recievedStatus"
+        if (recievedStatus != 0) {
+            error"Waiting for Input terminated with ${recievedStatus}"
+        }
+        println "Input Script status: $recievedStatus"
 
     }
     stage('Finishing up') {
