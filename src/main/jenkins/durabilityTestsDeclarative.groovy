@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Waiting for some Input') {
             steps {
-                echo "Waiting for Input
+                echo "Waiting for Input"
                 script {
                     recievedStatus = sh(returnStatus: true, script: "${WORKSPACE}/src/test/ruby/input.rb")
                     println "Input Script status: $recievedStatus"
