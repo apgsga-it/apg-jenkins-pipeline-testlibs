@@ -7,10 +7,10 @@ def approve() {
     userInput = input (id:"BuildOk" , message:"Ok for Build?" , submitter: 'svcjenkinsclient')
 }
 
-def buildSome(path) {
-    echo "Building $path"
-    dir("$path") {
-        sh "mvn clean install"
+def buildSome(aBuildDir) {
+    echo "Building $aBuildDir"
+    dir("$aBuildDir") {
+        withMaven( maven: 'maven') { sh "${mvCommand}" }
     }
 }
 

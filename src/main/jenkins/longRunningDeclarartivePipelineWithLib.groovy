@@ -2,10 +2,6 @@
 library 'testlib-functions'
 pipeline {
     agent any
-    tools {
-        maven 'maven'
-        jdk 'Jdk8'
-    }
     stages {
         stage('Executing Long Running State') { // for display purposes
             steps {
@@ -28,7 +24,7 @@ pipeline {
         stage('Finishing up') {
             steps {
                 script {
-                    echo "Howdy from a Declarative Pipeline"
+                    shoutOut "Howdy from a Declarative Pipeline"
                 }
             }
         }
