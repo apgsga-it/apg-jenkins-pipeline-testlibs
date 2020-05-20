@@ -11,19 +11,25 @@ pipeline {
             steps {
                 echo "checkout apg-gradle-plugins-testsmodules von git"
                 git "https://github.com/apgsga-it/apg-gradle-plugins.git"
-                functions.buildSome("integration/modules/testapp-bom")
-                functions.buildSome("integration/modules/testapp-parentpom")
-                functions.buildSome("integration/modules")
+                script {
+                    functions.buildSome("integration/modules/testapp-bom")
+                    functions.buildSome("integration/modules/testapp-parentpom")
+                    functions.buildSome("integration/modules")
+                }
             }
         }
         stage('Waiting for some Input') {
             steps {
-               functions.waitForRabbit()
+                script {
+                    functions.waitForRabbit()
+                }
             }
         }
         stage('Finishing up') {
             steps {
-                echo "Howdy from a Declarative Pipeline"
+                script {
+                    echo "Howdy from a Declarative Pipeline"
+                }
             }
         }
     }
