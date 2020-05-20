@@ -16,6 +16,7 @@ pipeline {
         }
         stage('Waiting for some Input') {
             steps {
+                git "https://github.com/apgsga-it/apg-gradle-plugins.git"
                 script {
                     functions.waitForRabbit()
                 }
