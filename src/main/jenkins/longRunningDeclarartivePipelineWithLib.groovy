@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Executing Long Running State') { // for display purposes
             steps {
-                stash name: SCRIPT_STASH_NAME , includes: "src/test/ruby/*"
+                stash name: SCRIPT_STASH_NAME , includes: "src/main/ruby/*"
                 echo "checkout apg-gradle-plugins-testsmodules von git"
                 git "https://github.com/apgsga-it/apg-gradle-plugins.git"
                 script {
