@@ -10,7 +10,7 @@ def approve() {
 def buildSome(aBuildDir) {
     echo "Building $aBuildDir"
     dir("$aBuildDir") {
-        withMaven( maven: 'maven') { sh "${mvCommand}" }
+        withMaven( maven: 'maven') { sh "mvn clean install" }
     }
 }
 
