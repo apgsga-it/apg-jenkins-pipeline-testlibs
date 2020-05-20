@@ -15,6 +15,9 @@ pipeline {
                 echo "Waiting for Input"
                 script {
                     recievedStatus = sh(returnStatus: true, script: "${WORKSPACE}/src/test/ruby/input.rb")
+                    if (recievedStatus != 0) {
+                        error"Waiting for Input terminated with ${recievedStatus}"
+                    }
                     println "Input Script status: $recievedStatus"
                 }
             }
