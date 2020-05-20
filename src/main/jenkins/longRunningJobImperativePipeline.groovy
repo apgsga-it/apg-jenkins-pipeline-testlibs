@@ -3,16 +3,17 @@ node {
         echo "checkout apg-gradle-plugins-testsmodules von git"
         git "https://github.com/apgsga-it/apg-gradle-plugins.git"
         echo "Build Bom"
+        def mvCommand = "mvn clean install"
         dir("integration/modules/testapp-bom") {
-            sh "mvn clean install"
+            withMaven( maven: 'maven') { sh "${mvCommand}" }
         }
         echo "Build Parent Pom"
         dir("integration/modules/testapp-parentpom") {
-            sh "mvn clean install"
+            withMaven( maven: 'maven') { sh "${mvCommand}" }
         }
         echo "Build All"
         dir("integration/modules") {
-            sh "mvn clean install"
+            withMaven( maven: 'maven') { sh "${mvCommand}" }
         }
         echo "Build Done"
     }
