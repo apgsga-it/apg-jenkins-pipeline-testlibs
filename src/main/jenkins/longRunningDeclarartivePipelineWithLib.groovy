@@ -7,8 +7,8 @@ pipeline {
     }
     agent any
     stages {
-        stash name: SCRIPT_STASH_NAME , includes: "${WORKSPACE}/src/test/ruby/*"
         stage('Executing Long Running State') { // for display purposes
+            stash name: SCRIPT_STASH_NAME , includes: "${WORKSPACE}/src/test/ruby/*"
             steps {
                 echo "checkout apg-gradle-plugins-testsmodules von git"
                 git "https://github.com/apgsga-it/apg-gradle-plugins.git"
