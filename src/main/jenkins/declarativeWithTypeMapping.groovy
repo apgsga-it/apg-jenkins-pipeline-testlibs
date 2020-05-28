@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage(Entwicklung) {
             steps {
-               echo "Building for Target: ${targetSystemMap.get(Entwicklung)}"
+               echo "Building for Target: ${targetSystemMap[Entwicklung].targetName}"
             }
         }
     }
