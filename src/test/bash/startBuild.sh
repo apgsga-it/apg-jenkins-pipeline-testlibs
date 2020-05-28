@@ -2,8 +2,8 @@
 
 USERNAME="che"
 APITOKEN="110e4477bc6617996960b87c9841383ec1"
-JSONPARAMETER='{"parameter": [{"name": "testParamater", "value": "Something else Whatever"},
-  {"name":"data/patchFile.json", "file":"file0"}]}'
+JSONPARAMETER='{"parameter": [{"name": "testParameter", "value": "Something else Whatever"},
+  {"name":"patchFile.json", "file":"file0"}]}'
 JENKINSURL="http://172.16.92.140:8080/"
 JENKINSJOB="job/TestDeclarativeWithTargetSystemMappings/build"
 # shellcheck disable=SC2006

@@ -6,7 +6,7 @@ println(targetSystemMappingFile)
 def targetSystemMap = functions.loadTargetsMap(targetSystemMappingFile)
 println(targetSystemMap)
 node {
-    def file_in_workspace = unstashParam "file"
+    def file_in_workspace = unstashFileParameter "patchFile.json"
     sh "cat ${file_in_workspace}"
 }
 pipeline {
