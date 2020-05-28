@@ -8,6 +8,7 @@ println(targetSystemMap)
 node {
     def file_in_workspace = unstashFileParameter "patchFile.json"
     sh "cat ${file_in_workspace}"
+    stash "PatchFile" , file_in_workspace
 }
 pipeline {
     options {
@@ -19,6 +20,10 @@ pipeline {
         stage(Entwicklung) {
             steps {
                echo "Building for Target: ${targetSystemMap[Entwicklung].targetName}"
+                script {
+                    unstash("PatchFile")
+                    sh "cat Patch5401.json"
+                }
             }
         }
     }
