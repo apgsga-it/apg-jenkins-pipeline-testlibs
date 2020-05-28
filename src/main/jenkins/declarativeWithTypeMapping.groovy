@@ -1,5 +1,5 @@
 #!groovy
 library 'testlib-functions'
 def targetSystemMappingFile = libraryResource("TargetSystemMapping.json")
-def targetSystemMap = loadTargetsMap(targetSystemMappingFile)
+def targetSystemMap = functions.loadTargetsMap(targetSystemMappingFile)
 println(targetSystemMap)
