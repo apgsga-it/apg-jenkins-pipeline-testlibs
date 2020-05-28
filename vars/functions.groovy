@@ -44,7 +44,9 @@ def stagesConcurrent(stageName, stashName, parameters, callback) {
         def app = "BuildNr-${i}"
         buildJobs[app] = {
             stage("${stageName} Parallel ${app}") {
-                callback(stashName, parameters)
+                lock(stageName) {
+                    callback(stashName, parameters)
+                }
             }
         }
     }
