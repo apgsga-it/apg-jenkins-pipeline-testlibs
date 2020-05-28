@@ -43,7 +43,7 @@ def stagesConcurrent(stageName, stashName, parameters, callback) {
     def buildJobs = [:]
     for (int i = 0; i <= 5 ; i++) {
          buildJobs["jobNr-${i}"] = {
-             stage(stageName${i}) {
+             stage("${stageName} ${i}") {
                  callback(stashName, parameters)
              }
          }
