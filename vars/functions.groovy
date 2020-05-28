@@ -1,16 +1,15 @@
-
 def helloWorld() {
     echo "Hello World"
 }
 
 def approve() {
-    userInput = input (id:"BuildOk" , message:"Ok for Build?" )
+    userInput = input(id: "BuildOk", message: "Ok for Build?")
 }
 
 def buildSome(aBuildDir) {
     echo "Building $aBuildDir"
     dir("$aBuildDir") {
-        withMaven( maven: 'maven') { sh "mvn clean install" }
+        withMaven(maven: 'maven') { sh "mvn clean install" }
     }
 }
 
@@ -18,7 +17,7 @@ def buildSomeFromStash(stashName, aBuildDir) {
     echo "Building $aBuildDir"
     dir("${aBuildDir}") {
         unstash stashName
-        withMaven( maven: 'maven') { sh "mvn clean install" }
+        withMaven(maven: 'maven') { sh "mvn clean install" }
     }
 }
 
@@ -27,7 +26,7 @@ def waitForRabbit(stashName) {
     unstash stashName
     def recievedStatus = sh(returnStatus: true, script: "src/test/ruby/input.rb")
     if (recievedStatus != 0) {
-        error"Waiting for Input terminated with ${recievedStatus}"
+        error "Waiting for Input terminated with ${recievedStatus}"
     }
     println "Input Script status: $recievedStatus"
 }
@@ -41,15 +40,13 @@ def stage(stageName, stashName, parameters, callback) {
 
 def stagesConcurrent(stageName, stashName, parameters, callback) {
     def buildJobs = [:]
-    for (int i = 0; i <= 3 ; i++) {
+    for (int i = 0; i <= 3; i++) {
         def app = "BuildNr-${i}"
-         buildJobs[app] = {
-             stage("${stageName} Parallel ${app}") {
-                 node {
-                     callback(stashName, parameters)
-                 }
-             }
-         }
+        buildJobs[app] = {
+            stage("${stageName} Parallel ${app}") {
+                callback(stashName, parameters)
+            }
+        }
     }
     parallel buildJobs
 }
