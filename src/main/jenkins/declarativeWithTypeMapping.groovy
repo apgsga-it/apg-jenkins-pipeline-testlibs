@@ -1,5 +1,6 @@
 #!groovy
 library 'testlib-functions'
+java.lang.String Entwicklung = "Entwicklung"
 def targetSystemMappingFile = libraryResource("TargetSystemMappings.json")
 println(targetSystemMappingFile)
 def targetSystemMap = functions.loadTargetsMap(targetSystemMappingFile)
@@ -10,9 +11,9 @@ pipeline {
     }
     agent any
     stages {
-        stage("Entwicklung ") {
+        stage(Entwicklung) {
             steps {
-               echo "Building for Target: ${targetSystemMap.get("Entwickling")}"
+               echo "Building for Target: ${targetSystemMap.get(Entwicklung)}"
             }
         }
     }
