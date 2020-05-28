@@ -4,11 +4,19 @@ def helloWorld() {
 }
 
 def approve() {
-    userInput = input (id:"BuildOk" , message:"Ok for Build?" , submitter: 'svcjenkinsclient')
+    userInput = input (id:"BuildOk" , message:"Ok for Build?" )
 }
 
 def buildSome(aBuildDir) {
     echo "Building $aBuildDir"
+    dir("$aBuildDir") {
+        withMaven( maven: 'maven') { sh "mvn clean install" }
+    }
+}
+
+def buildSomeFromStash(stashName, aBuildDir) {
+    echo "Building $aBuildDir"
+    unstash stashName
     dir("$aBuildDir") {
         withMaven( maven: 'maven') { sh "mvn clean install" }
     }
@@ -22,4 +30,10 @@ def waitForRabbit(stashName) {
         error"Waiting for Input terminated with ${recievedStatus}"
     }
     println "Input Script status: $recievedStatus"
+}
+
+def stage(stageName, stashName, parameters, callback) {
+    stage(stageName) {
+        callback(stashName, parameters)
+    }
 }
