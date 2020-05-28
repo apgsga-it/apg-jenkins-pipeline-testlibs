@@ -8,7 +8,7 @@ println(targetSystemMap)
 node {
     def file_in_workspace = unstashFileParameter "patchFile.json"
     sh "cat ${file_in_workspace}"
-    stash "PatchFile" , file_in_workspace
+    stash name: "PatchFile" , includes:  file_in_workspace
 }
 pipeline {
     options {
