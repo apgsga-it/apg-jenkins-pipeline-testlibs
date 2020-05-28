@@ -16,8 +16,8 @@ def buildSome(aBuildDir) {
 
 def buildSomeFromStash(stashName, aBuildDir) {
     echo "Building $aBuildDir"
-    unstash stashName
-    dir("${WORKSPACE}/${aBuildDir}") {
+    dir("${aBuildDir}") {
+        unstash stashName
         withMaven( maven: 'maven') { sh "mvn clean install" }
     }
 }
