@@ -1,6 +1,8 @@
 #!groovy
 library 'testlib-functions'
 def STASH_NAME = "modules"
+def targetSystemsMap = functions.loadTargetsMap()
+functions.log("TargetSystemsMap : ${targetSystemsMap} ")
 pipeline {
     options {
         preserveStashes(buildCount: 2)
