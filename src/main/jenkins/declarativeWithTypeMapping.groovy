@@ -4,3 +4,16 @@ def targetSystemMappingFile = libraryResource("TargetSystemMappings.json")
 println(targetSystemMappingFile)
 def targetSystemMap = functions.loadTargetsMap(targetSystemMappingFile)
 println(targetSystemMap)
+pipeline {
+    options {
+        preserveStashes(buildCount: 2)
+    }
+    agent any
+    stages {
+        stage("Entwicklung ") {
+            steps {
+               echo "Building for Target: ${targetSystemMap.get("Entwickling")}"
+            }
+        }
+    }
+}
