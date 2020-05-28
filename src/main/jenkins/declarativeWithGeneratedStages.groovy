@@ -7,13 +7,15 @@ pipeline {
     }
     agent any
     stages {
-        stage("Build's") {
+        stage("Prepaare and Generate Builds Stages") {
             steps {
                 echo "checkout apg-gradle-plugins-testsmodules von git"
                 git "https://github.com/apgsga-it/apg-gradle-plugins.git"
                 stash name: STASH_NAME , includes: "integration/modules/*"
                 script {
                     functions.stage("Build testapp-bom", STASH_NAME,"integration/modules/testapp-bom", functions.&buildSomeFromStash)
+                    functions.stage("Build testapp-parentpom" , STASH_NAME,"integration/modules/testapp-parentpom",  functions.&buildSomeFromStash)
+                    functions.stage("Build modules" , STASH_NAME,"integration/modules",  functions.&buildSomeFromStash)
                 }
             }
         }
