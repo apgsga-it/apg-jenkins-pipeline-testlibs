@@ -15,7 +15,7 @@ pipeline {
                 script {
                     functions.stage("Build testapp-bom", STASH_NAME,"integration/modules/testapp-bom", functions.&buildSomeFromStash)
                     functions.stage("Build testapp-parentpom" , STASH_NAME,"integration/modules/testapp-parentpom",  functions.&buildSomeFromStash)
-                    functions.stage("Build modules" , STASH_NAME,"integration/modules/testapp-module",  functions.&stagesConcurrenFromStash)
+                    functions.stage("Build modules" , STASH_NAME,"integration/modules/testapp-module",  functions.&stagesConcurrentFromStash)
                     functions.stage("Build service" , STASH_NAME,"integration/modules/testapp-service",  functions.&buildSomeFromStash)
                 }
             }
