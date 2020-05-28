@@ -57,9 +57,9 @@ def stagesConcurrent(stageName, stashName, parameters, callback) {
     parallel buildJobs
 }
 
-def loadTargetsMap(jsonFile) {
+def loadTargetsMap(jsonText) {
     def targetSystemMap = [:]
-    def targetSystemJson = new JsonSlurper().parseText(jsonFile.text)
+    def targetSystemJson = new JsonSlurper().parseText(jsonText)
     targetSystemJson.stageMappings.each( { target ->
         targetSystemMap.put(target.name, [envName:target.name,targetName:target.target])
     })
