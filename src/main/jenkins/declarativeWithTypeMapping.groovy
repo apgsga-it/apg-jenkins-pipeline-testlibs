@@ -5,9 +5,14 @@ def targetSystemMappingFile = libraryResource("TargetSystemMappings.json")
 println(targetSystemMappingFile)
 def targetSystemMap = functions.loadTargetsMap(targetSystemMappingFile)
 println(targetSystemMap)
+node {
+    def file_in_workspace = unstashParam "file"
+    sh "cat ${file_in_workspace}"
+}
 pipeline {
     options {
         preserveStashes(buildCount: 2)
+        timestamps ()
     }
     agent any
     stages {
