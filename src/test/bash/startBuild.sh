@@ -1,5 +1,6 @@
 #!/bin/bash
-
+## TODO (che, jhe) : Which scripting host
+## TODO (che, jhe) : Parameters
 USERNAME="che"
 APITOKEN="110e4477bc6617996960b87c9841383ec1"
 JSONPARAMETER='{"parameter": [{"name": "testParameter", "value": "Something else Whatever"},
