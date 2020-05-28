@@ -41,10 +41,13 @@ def stage(stageName, stashName, parameters, callback) {
 
 def stagesConcurrent(stageName, stashName, parameters, callback) {
     def buildJobs = [:]
-    for (int i = 0; i <= 5 ; i++) {
-         buildJobs["jobNr-${i}"] = {
-             stage("${stageName} ${i}") {
-                 callback(stashName, parameters)
+    for (int i = 0; i <= 3 ; i++) {
+        def app = "BuildNr-${i}"
+         buildJobs[app] = {
+             stage("${stageName} ${app}") {
+                 node {
+                     callback(stashName, parameters)
+                 }
              }
          }
     }
