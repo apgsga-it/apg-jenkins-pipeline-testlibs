@@ -44,5 +44,27 @@ pipeline {
                 }
             }
         }
+        stage("Not Ok, with returnStatus") {
+            steps {
+                script {
+                    unstash("Errorscript")
+                    sh "chmod u+x error.pl"
+                    def returnStatus =  sh returnStatus: true, script: "./error.pl -t SomeOtherErrorText -e"
+                    if (returnStatus != 0) {
+                        echo "Error detected, WAT?????, still continueing"
+                    }
+                }
+            }
+        }
+        stage("Not Ok, with returnStandard Output , continue") {
+            steps {
+                script {
+                    unstash("Errorscript")
+                    sh "chmod u+x error.pl"
+                    def returnStd =  sh returnStdout: true, script: "./error.pl -t SomeOtherErrorText -e"
+                    echo "We got: ${returnStd} and now WAT?"
+                }
+            }
+        }
     }
 }
