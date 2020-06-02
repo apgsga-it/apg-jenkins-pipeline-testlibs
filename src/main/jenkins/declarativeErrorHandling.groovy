@@ -2,7 +2,7 @@
 library 'testlib-functions'
 java.lang.String Entwicklung = "Entwicklung"
 node {
-    stash name: "Errorscript", includes: "src/main/error.pl"
+    stash name: "Errorscript", includes: "src/main/perl/error.pl"
 }
 pipeline {
     options {
@@ -16,7 +16,7 @@ pipeline {
                 script {
                     unstash("Errorscript")
                     sh "chmod u+x error.pl"
-                    sh "./error.pl"
+                    sh "./src/main/perl/error.pl"
                 }
             }
         }
