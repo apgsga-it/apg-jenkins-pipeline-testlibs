@@ -1,7 +1,7 @@
 #!groovy
 library 'testlib-functions'
 def Entwicklung = "Entwicklung"
-def targetSystemMap = ["$Entwicklung":"CHEI212"]
+def targetSystemMap = [Entwicklung:"CHEI212"]
 pipeline {
     options {
         preserveStashes(buildCount: 2)
