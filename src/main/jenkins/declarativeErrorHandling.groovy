@@ -56,7 +56,7 @@ pipeline {
                 }
             }
         }
-        stage("Not Ok, with returnStandard Output) {
+        stage("Not Ok, with returnStandard Output") {
             steps {
                 script {
                     unstash("Errorscript")
