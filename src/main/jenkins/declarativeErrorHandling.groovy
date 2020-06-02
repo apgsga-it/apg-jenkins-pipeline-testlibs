@@ -1,10 +1,10 @@
 #!groovy
 library 'testlib-functions'
 java.lang.String Entwicklung = "Entwicklung"
-def errorPerlScript = libraryResource("TargetSystemMappings.json")
+def errorPerlScript = libraryResource("error.pl")
 node {
     writeFile file: "error.pl", text: errorPerlScript
-    stash name: "Errorscript", include: "error.pl"
+    stash name: "Errorscript", includes: "error.pl"
 }
 pipeline {
     options {
@@ -15,7 +15,6 @@ pipeline {
     stages {
         stage(Entwicklung) {
             steps {
-               echo "Building for Target: ${targetSystemMap[Entwicklung].targetName}"
                 script {
                     unstash("Errorscript")
                     sh "error.pl"
