@@ -30,5 +30,19 @@ pipeline {
                 }
             }
         }
+        stage("Not Ok, with try catch block, continue") {
+            steps {
+                script {
+                    unstash("Errorscript")
+                    sh "chmod u+x error.pl"
+                    try {
+                        sh "./error.pl -t SomeErrorText =e"
+                    } catch (err) {
+                        echo err.getMessage()
+                        echo "Error detected, but we will continue."
+                    }
+                }
+            }
+        }
     }
 }
