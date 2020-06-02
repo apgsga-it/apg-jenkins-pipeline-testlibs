@@ -67,7 +67,7 @@ pipeline {
                     }
                     catch (err) {
                         echo err.getMessage()
-                        echo "We got: ${returnStd} from standardout?"
+                        echo "We got: ${returnStd} from standardout"
                     }
                 }
             }
