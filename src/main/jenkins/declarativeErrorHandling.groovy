@@ -26,7 +26,7 @@ pipeline {
                 script {
                     unstash("Errorscript")
                     sh "chmod u+x error.pl"
-                    sh "./error.pl -t SomeErrorText -e"
+                   // sh "./error.pl -t SomeErrorText -e"
                 }
             }
         }
