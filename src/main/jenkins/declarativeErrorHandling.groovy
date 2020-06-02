@@ -72,5 +72,21 @@ pipeline {
                 }
             }
         }
+        stage("Not Ok, with returnStandard Output with Erroroutput redirection") {
+            steps {
+                script {
+                    unstash("Errorscript")
+                    sh "chmod u+x error.pl"
+                    def returnStd = "Initial"
+                    try {
+                        returnStd = sh returnStdout: true, script: "./error.pl -t SomeYetOtherErrorText -e 2>&1"
+                    }
+                    catch (err) {
+                        echo err.getMessage()
+                        echo "We got: ${returnStd} from standardout"
+                    }
+                }
+            }
+        }
     }
 }
