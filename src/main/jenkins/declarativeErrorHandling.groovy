@@ -61,7 +61,8 @@ pipeline {
                 script {
                     unstash("Errorscript")
                     sh "chmod u+x error.pl"
-                  //  def returnStd = sh returnStdout: true, script: "./error.pl -t SomeYetOtherErrorText -e"
+                   // def returnStd = sh returnStdout: true, script: "./error.pl -t SomeYetOtherErrorText -e"
+                    def returnStd = sh returnStdout: true, script: "./error.pl -t SomeYetOtherErrorText"
                     echo "Never get's to here: $returnStd"
                 }
             }
