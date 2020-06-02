@@ -1,6 +1,5 @@
 #!groovy
 library 'testlib-functions'
-java.lang.String Entwicklung = "Entwicklung"
 def errorPerlScript = libraryResource("error.pl")
 node {
     writeFile file: "error.pl", text: errorPerlScript
@@ -13,12 +12,21 @@ pipeline {
     }
     agent any
     stages {
-        stage(Entwicklung) {
+        stage("Ok") {
             steps {
                 script {
                     unstash("Errorscript")
                     sh "chmod u+x error.pl"
                     sh "./error.pl -t Sometext"
+                }
+            }
+        }
+        stage("Not Ok, without errorhandling") {
+            steps {
+                script {
+                    unstash("Errorscript")
+                    sh "chmod u+x error.pl"
+                    sh "./error.pl -t SomeErrorText =e"
                 }
             }
         }
