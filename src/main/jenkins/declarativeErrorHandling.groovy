@@ -17,7 +17,8 @@ pipeline {
             steps {
                 script {
                     unstash("Errorscript")
-                    sh "error.pl"
+                    sh "cat error.pl"
+                    sh "chmod u+x error.pl"
                 }
             }
         }
