@@ -26,7 +26,7 @@ pipeline {
                 script {
                     unstash("Errorscript")
                     sh "chmod u+x error.pl"
-                    sh "./error.pl -t SomeErrorText =e"
+                    sh "./error.pl -t SomeErrorText -e"
                 }
             }
         }
@@ -36,7 +36,7 @@ pipeline {
                     unstash("Errorscript")
                     sh "chmod u+x error.pl"
                     try {
-                        sh "./error.pl -t SomeErrorText =e"
+                        sh "./error.pl -t SomeOtherErrorText -e"
                     } catch (err) {
                         echo err.getMessage()
                         echo "Error detected, but we will continue."
