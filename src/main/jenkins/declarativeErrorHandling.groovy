@@ -2,8 +2,10 @@
 library 'testlib-functions'
 java.lang.String Entwicklung = "Entwicklung"
 def errorPerlScript = libraryResource("TargetSystemMappings.json")
-writeFile file: "error.pl", text: errorPerlScript
-stash "Errorscript", "error.pl"
+node {
+    writeFile file: "error.pl", text: errorPerlScript
+    stash name: "Errorscript", include: "error.pl"
+}
 pipeline {
     options {
         preserveStashes(buildCount: 2)
