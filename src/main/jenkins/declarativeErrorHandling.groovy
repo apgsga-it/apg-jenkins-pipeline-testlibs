@@ -1,8 +1,10 @@
 #!groovy
 library 'testlib-functions'
 java.lang.String Entwicklung = "Entwicklung"
+def errorPerlScript = libraryResource("error.pl")
 node {
-    stash name: "Errorscript", includes: "src/test/perl/error.pl"
+    writeFile file: "error.pl", text: errorPerlScript
+    stash name: "Errorscript", includes: "error.pl"
 }
 pipeline {
     options {
@@ -16,7 +18,7 @@ pipeline {
                 script {
                     unstash("Errorscript")
                     sh "chmod u+x error.pl"
-                    sh "./src/test/perl/error.pl"
+                    sh "./error.pl -t Sometext"
                 }
             }
         }
