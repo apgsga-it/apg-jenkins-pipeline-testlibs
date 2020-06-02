@@ -8,6 +8,10 @@ def approve() {
     userInput = input(id: "BuildOk", message: "Ok for Build?")
 }
 
+def error(text, errorTermimate) {
+
+}
+
 def buildSome(aBuildDir) {
     echo "Building $aBuildDir"
     dir("$aBuildDir") {
