@@ -2,6 +2,8 @@
 use strict;
 use warnings FATAL => 'all';
 use Getopt::Long;
+use Pod::Usage;
+
 
 my $text = "";
 my $help = 0;
@@ -9,7 +11,7 @@ my $error = 0;
 GetOptions(
     'help'   => \$help,
     'text=s' => \$text,
-    'error'  => \%error
+    'error'  => \$error
 ) or pod2usage(2);
 pod2usage(-exitval => 0) if $help or !($text);
 die $text if $error;
