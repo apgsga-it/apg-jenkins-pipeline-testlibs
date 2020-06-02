@@ -51,12 +51,22 @@ pipeline {
                     sh "chmod u+x error.pl"
                     def returnStatus = sh returnStatus: true, script: "./error.pl -t SomeOtherErrorText -e"
                     if (returnStatus != 0) {
-                        echo "Error detected, WAT?????, still continueing"
+                        echo "Error detected and WAT?????, still continueing"
                     }
                 }
             }
         }
-        stage("Not Ok, with returnStandard Output") {
+        stage("Not Ok, with returnStandard Output) {
+            steps {
+                script {
+                    unstash("Errorscript")
+                    sh "chmod u+x error.pl"
+                    def returnStd = sh returnStdout: true, script: "./error.pl -t SomeYetOtherErrorText -e"
+                    echo "Never get's to here: $returnStd"
+                }
+            }
+        }
+        stage("Not Ok, with returnStandard Output, try catch") {
             steps {
                 script {
                     unstash("Errorscript")
@@ -64,22 +74,6 @@ pipeline {
                     def returnStd = "Initial"
                     try {
                         returnStd = sh returnStdout: true, script: "./error.pl -t SomeYetOtherErrorText -e"
-                    }
-                    catch (err) {
-                        echo err.getMessage()
-                        echo "We got: ${returnStd} from standardout"
-                    }
-                }
-            }
-        }
-        stage("Not Ok, with returnStandard Output with Erroroutput redirection") {
-            steps {
-                script {
-                    unstash("Errorscript")
-                    sh "chmod u+x error.pl"
-                    def returnStd = "Initial"
-                    try {
-                        returnStd = sh returnStdout: true, script: "./error.pl -t SomeYetOtherErrorText -e 2>&1"
                     }
                     catch (err) {
                         echo err.getMessage()
