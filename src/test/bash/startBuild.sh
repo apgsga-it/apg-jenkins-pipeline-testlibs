@@ -11,4 +11,3 @@ JENKINSJOB="job/TestDeclarativeWithTargetSystemMappings/build"
 CRUMB=`curl -s -u "$USERNAME:$APITOKEN" '172.16.92.140:8080/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)'`
 echo "Crumb : $CRUMB"
 curl  -v $JENKINSURL$JENKINSJOB  -s -X POST -u "$USERNAME:$APITOKEN"  -H "$CRUMB" -F file0=@/Users/chhex/git/apg-jenkins-pipelines/src/test/resources/Patch5401.json -F json="$JSONPARAMETER"
-
