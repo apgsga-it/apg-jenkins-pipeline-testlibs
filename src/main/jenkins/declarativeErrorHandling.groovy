@@ -8,7 +8,7 @@ node {
 pipeline {
     options {
         preserveStashes(buildCount: 2)
-        timestamps ()
+        timestamps()
     }
     agent any
     stages {
@@ -26,7 +26,7 @@ pipeline {
                 script {
                     unstash("Errorscript")
                     sh "chmod u+x error.pl"
-                   // sh "./error.pl -t SomeErrorText -e"
+                    // sh "./error.pl -t SomeErrorText -e"
                 }
             }
         }
@@ -49,20 +49,26 @@ pipeline {
                 script {
                     unstash("Errorscript")
                     sh "chmod u+x error.pl"
-                    def returnStatus =  sh returnStatus: true, script: "./error.pl -t SomeOtherErrorText -e"
+                    def returnStatus = sh returnStatus: true, script: "./error.pl -t SomeOtherErrorText -e"
                     if (returnStatus != 0) {
                         echo "Error detected, WAT?????, still continueing"
                     }
                 }
             }
         }
-        stage("Not Ok, with returnStandard Output , continue") {
+        stage("Not Ok, with returnStandard Output") {
             steps {
                 script {
                     unstash("Errorscript")
                     sh "chmod u+x error.pl"
-                    def returnStd =  sh returnStdout: true, script: "./error.pl -t SomeOtherErrorText -e"
-                    echo "We got: ${returnStd} and now WAT?"
+                    def returnStd = "Initial"
+                    try {
+                        returnStd = sh returnStdout: true, script: "./error.pl -t SomeYetOtherErrorText -e"
+                    }
+                    catch (err) {
+                        echo err.getMessage()
+                        echo "We got: ${returnStd} from standardout?"
+                    }
                 }
             }
         }
