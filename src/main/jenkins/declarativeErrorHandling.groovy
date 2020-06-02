@@ -19,6 +19,7 @@ pipeline {
                     unstash("Errorscript")
                     sh "cat error.pl"
                     sh "chmod u+x error.pl"
+                    sh "./error.pl"
                 }
             }
         }
