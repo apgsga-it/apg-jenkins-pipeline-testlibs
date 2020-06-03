@@ -7,17 +7,16 @@ opts = Slop.parse do |o|
   o.string '-h', '--hostname', '--host', 'Jenkins host'
   o.string '-t', '--apitoken', '--token', 'Jenkins user token'
   o.string '-j', '--jobname', '--job', 'Jenkins Job name', default: "TestDeclarativeWithTargetSystemMappings"
+  o.string '-f', '--filename', '--upload', "Patch File to upload as Job Parameter to Jenkins"
   o.separator ''
   o.separator 'other options:'
-  o.string '-f', '--filename', '--upload', "Patch File to upload as Job Parameter to Jenkins"
-  o.string '-p', '--parameter', '--jobparameter', "Jenkins Job Parameter"
   o.bool '-l', '--list', 'List available Jenkinsjobs'
   o.on '--help' do
     puts o
     exit
   end
 end
-jobs = {"TestDeclarativeErrorHandling" => "Some parameter", "TestDeclarativeWithTargetSystemMappings" => %Q@{"parameter": [{"name": "testParameter", "value": "Something else Whatever"}, {"name":"patchFile.json", "file":"file0"}]}@}
+jobs = {"TestDeclarativeWithTargetSystemMappings" => %Q@{"parameter": [{"name":"patchFile.json", "file":"file0"}]}@}
 if (opts[:list])
   puts "Available Jobs:"
   puts jobs.keys
