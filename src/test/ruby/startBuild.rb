@@ -11,7 +11,7 @@ opts = Slop.parse do |o|
   o.separator 'other options:'
   o.string '-f', '--filename', '--upload', "Patch File to upload as Job Parameter to Jenkins"
   o.string '-p', '--parameter', '--jobparameter', "Jenkins Job Parameter"
-  o.bool '-l', '--list', 'List available Jenkinsjobsr'
+  o.bool '-l', '--list', 'List available Jenkinsjobs'
   o.on '--help' do
     puts o
     exit
