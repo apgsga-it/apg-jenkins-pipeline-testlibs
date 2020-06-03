@@ -52,3 +52,4 @@ end
 curlCmd += +%Q@ -F json='#{jobParameter}'@
 puts "<#{curlCmd}>"
 system "#{curlCmd}"
+  
