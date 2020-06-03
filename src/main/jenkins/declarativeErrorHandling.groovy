@@ -12,7 +12,7 @@ pipeline {
     }
     agent any
     stages {
-        stage("Ok") {
+        stage("(A) Ok") {
             steps {
                 script {
                     unstash("Errorscript")
@@ -21,12 +21,12 @@ pipeline {
                 }
             }
         }
-        stage("Not Ok, without errorhandling") {
+        stage("(B) Not Ok, without errorhandling") {
             steps {
                 script {
                     unstash("Errorscript")
                     sh "chmod u+x error.pl"
-                    if (params.skip) {
+                    if (params.skipB) {
                         echo "Skipping Test"
                     } else {
                         sh "./error.pl -t SomeErrorText -e"
@@ -35,7 +35,7 @@ pipeline {
                 }
             }
         }
-        stage("Not Ok, with try catch block, continue") {
+        stage("(C) Not Ok, with try catch block, continue") {
             steps {
                 script {
                     unstash("Errorscript")
@@ -49,7 +49,7 @@ pipeline {
                 }
             }
         }
-        stage("Not Ok, with returnStatus") {
+        stage("(D) Not Ok, with returnStatus, continue") {
             steps {
                 script {
                     unstash("Errorscript")
@@ -61,12 +61,12 @@ pipeline {
                 }
             }
         }
-        stage("Not Ok, with returnStandard Output") {
+        stage("(E) Not Ok, with returnStandard Output, fails") {
             steps {
                 script {
                     unstash("Errorscript")
                     sh "chmod u+x error.pl"
-                    if (params.skip) {
+                    if (params.skipE) {
                         echo "Skipping Test"
                     } else {
                         def returnStd = sh returnStdout: true, script: "./error.pl -t SomeYetOtherErrorText -e"
@@ -74,7 +74,7 @@ pipeline {
                 }
             }
         }
-        stage("Not Ok, with returnStandard Output, try catch") {
+        stage("(F) Not Ok, with returnStandard Output, try catch") {
             steps {
                 script {
                     unstash("Errorscript")
