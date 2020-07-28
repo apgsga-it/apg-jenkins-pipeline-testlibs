@@ -7,8 +7,9 @@ def targetSystemMap = functions.loadTargetsMap(targetSystemMappingFile)
 println(targetSystemMap)
 node {
     def file_in_workspace = unstashFileParameter "patchFile.json"
-    sh "cat ${file_in_workspace}"
-    stash name: "PatchFile" , includes:  file_in_workspace
+    fileOperations([fileRennameOperation(source: "${file_in_workspace}",  destination: 'PatchFile.json')])
+    sh "cat PatchFile.json"
+    stash name: "PatchFile" , includes:  'PatchFile.json'
 }
 pipeline {
     options {
@@ -22,7 +23,7 @@ pipeline {
                echo "Building for Target: ${targetSystemMap[Entwicklung].targetName}"
                 script {
                     unstash("PatchFile")
-                    sh "cat Patch5401.json"
+                    sh "cat PatchFile.json"
                 }
             }
         }
