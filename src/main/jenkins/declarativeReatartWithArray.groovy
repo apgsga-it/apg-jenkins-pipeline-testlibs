@@ -13,7 +13,7 @@ pipeline {
                 script {
                     stageMappings.each { stageName ->
                         stage("Approve ${stageName} Build") {
-                            functions.doSomething(stageMappings(stageName))
+                            functions.doSomething(stageMappings[stageName])
                         }
 
                     }
