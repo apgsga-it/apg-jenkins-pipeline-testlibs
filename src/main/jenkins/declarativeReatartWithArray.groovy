@@ -14,10 +14,12 @@ pipeline {
                 script {
                     stageNames.each { stageName ->
                         stage("Approve ${stageName} Build") {
+                            functions.approve(stageMappings[stageName])
+                        }
+                        stage("Build  for ${stageName} ") {
                             functions.doSomething(stageMappings[stageName])
                         }
                     }
-                    println "Do something"
                 }
             }
         }

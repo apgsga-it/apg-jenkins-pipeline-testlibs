@@ -8,14 +8,18 @@ def approve() {
     userInput = input(id: "BuildOk", message: "Ok for Build?")
 }
 
+def approveTarget(target) {
+    userInput = input(id: "BuildOk", message: "Ok Build $target?")
+}
+
 def error(text, errorTermimate) {
 
 }
 
-def doSomething(stage) {
-    echo "Doing something with $stage"
+def buildSomething(target) {
+    echo "Building for $target"
     sleep(1000)
-    echo "Done with $stage."
+    echo "Done with $target."
 
 }
 
