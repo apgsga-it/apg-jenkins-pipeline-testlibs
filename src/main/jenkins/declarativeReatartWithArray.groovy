@@ -9,21 +9,18 @@ pipeline {
         preserveStashes(buildCount: 2)
         timestamps()
     }
-
     agent any
-
     stages {
         stage('Init') {
             steps {
                 script {
-
-                    stageMappings.each { target ->
-
-                        stage("Approve ${target} Build") {
-                            functions.doSomething(stageMappings(target))
-                        }
-
-                    }
+//                    stageMappings.each { target ->
+//                        stage("Approve ${target} Build") {
+//                            functions.doSomething(stageMappings(target))
+//                        }
+//
+//                    }
+                    println "Do something"
                 }
             }
         }
