@@ -7,12 +7,25 @@ println(stages)
 pipeline {
     options {
         preserveStashes(buildCount: 2)
-        timestamps ()
+        timestamps()
     }
+
     agent any
-    script {
-        stages.each { stage ->
-            functions.doSomething(stageMappings(stage))
+
+    stages {
+        stage('Init') {
+            steps {
+                script {
+
+                    stageMappings.each { target ->
+
+                        stage("Approve ${target} Build") {
+                            functions.doSomething(stageMappings(target))
+                        }
+
+                    }
+                }
+            }
         }
     }
 }
