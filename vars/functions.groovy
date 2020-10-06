@@ -12,6 +12,13 @@ def error(text, errorTermimate) {
 
 }
 
+def doSomething(stage) {
+    echo "Doing something with $stage"
+    sleep(1000)
+    echo "Done with $stage."
+
+}
+
 def buildSome(aBuildDir) {
     echo "Building $aBuildDir"
     dir("$aBuildDir") {
