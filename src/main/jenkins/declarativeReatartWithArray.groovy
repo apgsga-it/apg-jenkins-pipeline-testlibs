@@ -9,15 +9,15 @@ pipeline {
     }
     agent any
     stages {
-        stage('Init') {
+        stage('Stages Generation') {
             steps {
                 script {
                     stageNames.each { stageName ->
                         stage("Approve ${stageName} Build") {
-                            functions.approve(stageMappings[stageName])
+                            functions.approveTarget(stageMappings[stageName])
                         }
                         stage("Build  for ${stageName} ") {
-                            functions.doSomething(stageMappings[stageName])
+                            functions.buildSomething(stageMappings[stageName])
                         }
                     }
                 }
