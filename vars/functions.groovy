@@ -18,7 +18,7 @@ def error(text, errorTermimate) {
 
 def buildSomething(target) {
     echo "Building for $target"
-    sleep(1000)
+    sleep(100)
     echo "Done with $target."
 
 }
