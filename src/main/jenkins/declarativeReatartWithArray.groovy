@@ -1,19 +1,23 @@
 #!groovy
 library 'testlib-functions'
 def stageMappings = [ Entwickling:'CHEI212', Integration:'CHTI211']
-def stages = stageMappings.keySet() as List
 pipeline {
     options {
         preserveStashes(buildCount: 2)
-        timestamps ()
+        timestamps()
     }
     agent any
     stages {
-        stage(Entwicklung) {
+        stage('Init') {
             steps {
-                echo "Building for Target: ${targetSystemMap[Entwicklung]}"
                 script {
-                    functions.approve()
+                    stageMappings.each { stageName ->
+                        stage("Approve ${stageName} Build") {
+                            functions.doSomething(stageMappings(stageName))
+                        }
+
+                    }
+                    println "Do something"
                 }
             }
         }
