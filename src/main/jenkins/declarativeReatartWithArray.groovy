@@ -10,7 +10,9 @@ pipeline {
         timestamps ()
     }
     agent any
-    stages.each { stage ->
-        functions.doSomething(stageMappings(stage))
+    script {
+        stages.each { stage ->
+            functions.doSomething(stageMappings(stage))
+        }
     }
 }
